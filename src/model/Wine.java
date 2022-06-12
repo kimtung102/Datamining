@@ -72,7 +72,7 @@ public class Wine {
         atts.addElement(new Attribute("alcohol"));
         //nominal
         attVals = new FastVector();
-        for (i = 1; i <= 10; i++) {
+        for (i = 3; i <= 8; i++) {
             attVals.addElement(String.valueOf(i));
         }
         atts.addElement(new Attribute("quality", attVals));
