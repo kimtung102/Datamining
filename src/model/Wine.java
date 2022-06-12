@@ -4,6 +4,7 @@
  */
 package model;
 
+import static App.UI.currentPath;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import weka.core.Attribute;
@@ -100,7 +101,7 @@ public class Wine {
         data.add(new DenseInstance(1.0, vals));
 
         //xuat data ra file arff
-        BufferedWriter outWriter = new BufferedWriter(new FileWriter("D:\\wine-data\\wine-unlabel.arff"));
+        BufferedWriter outWriter = new BufferedWriter(new FileWriter(currentPath + "\\data\\wine-unlabel.arff"));
         outWriter.write(data.toString());
         outWriter.newLine();
         outWriter.flush();
