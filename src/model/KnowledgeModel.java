@@ -40,8 +40,12 @@ public class KnowledgeModel {
             this.data_options = weka.core.Utils.splitOptions(d_opts);  
         }
     }
+
+    KnowledgeModel() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
  
-  public void saveData(String filename) throws IOException{
+  public void saveData(String filename, Instances dataset) throws IOException{
         ArffSaver outData = new ArffSaver();
         outData.setInstances(dataset);
         outData.setFile(new File(filename));

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.FastVector;
@@ -54,7 +56,9 @@ public class Wine {
         double[] vals;
         int i;
 
+        //setup attribute
         atts = new FastVector();
+        //numberic
         atts.addElement(new Attribute("fixed acidity"));
         atts.addElement(new Attribute("volatile acidity"));
         atts.addElement(new Attribute("citric acid"));
@@ -66,14 +70,17 @@ public class Wine {
         atts.addElement(new Attribute("pH"));
         atts.addElement(new Attribute("sulphates"));
         atts.addElement(new Attribute("alcohol"));
-        
+        //nominal
         attVals = new FastVector();
-        for (i = 1; i <= 10; i++) attVals.addElement(String.valueOf(i));
+        for (i = 1; i <= 10; i++) {
+            attVals.addElement(String.valueOf(i));
+        }
         atts.addElement(new Attribute("quality", attVals));
-        // 2. create Instances object
+        
+        // create Instances object
         data = new Instances("test", atts, 0);
-        // 3. fill with data
-        // first instance
+        // fill data
+        // my instance
         vals = new double[data.numAttributes()];
         // - numeric
         vals[0] = fixedAcidity;
@@ -87,12 +94,19 @@ public class Wine {
         vals[8] = pH;
         vals[9] = sulphates;
         vals[10] = alcohol;
+        //missing value for predict
         vals[11] = Utils.missingValue();
-        
+        //add
         data.add(new DenseInstance(1.0, vals));
-        // 4. output data
-        System.out.println(data);
 
+        //output data
+        System.out.println(data);
+        //xuat data ra file arff
+        BufferedWriter outWriter = new BufferedWriter(new FileWriter("D:\\wine-unlabel.arff"));
+        outWriter.write(data.toString());
+        outWriter.newLine();
+        outWriter.flush();
+        outWriter.close();
     }
 
     public float getFixedAcidity() {
