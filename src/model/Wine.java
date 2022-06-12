@@ -34,6 +34,13 @@ public class Wine {
         this.sulphates = sulphates;
         this.alcohol = alcohol;
     }
+
+    public Wine() {
+        
+    }
+    public Wine( float fixedAcidity) {
+        this.fixedAcidity = fixedAcidity;
+    }
     
     public float getFixedAcidity() {
         return fixedAcidity;
@@ -79,7 +86,7 @@ public class Wine {
         return freeSulfurDioxide;
     }
 
-    public void setFreeSulfurDioxide(float freeSulfurDioxide) {
+    public void setFreeSulfurDioxide(int freeSulfurDioxide) {
         this.freeSulfurDioxide = freeSulfurDioxide;
     }
 
@@ -87,7 +94,7 @@ public class Wine {
         return totalSulfurDioxide;
     }
 
-    public void setTotalSulfurDioxide(float totalSulfurDioxide) {
+    public void setTotalSulfurDioxide(int totalSulfurDioxide) {
         this.totalSulfurDioxide = totalSulfurDioxide;
     }
 

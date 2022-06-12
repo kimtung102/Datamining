@@ -4,6 +4,8 @@
  */
 package App;
 
+import model.Wine;
+
 /**
  *
  * @author Admin
@@ -51,7 +53,7 @@ public class UI extends javax.swing.JFrame {
         textField7 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        myModel = new javax.swing.JTextArea();
         predictBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,12 +151,17 @@ public class UI extends javax.swing.JFrame {
 
         jLabel12.setText("Total sulfur dioxide:");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        myModel.setEditable(false);
+        myModel.setColumns(20);
+        myModel.setRows(5);
+        jScrollPane1.setViewportView(myModel);
 
         predictBtn.setText("Predict");
+        predictBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                predictBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -335,6 +342,25 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textField7ActionPerformed
 
+    private void predictBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictBtnActionPerformed
+        // TODO add your handling code here:
+        float fixedAcidity = Float.parseFloat(textField1.getText());
+        float volatileAcidity = Float.parseFloat(textField2.getText());
+        float citricAcid = Float.parseFloat(textField3.getText());
+        float residualSugar = Float.parseFloat(textField4.getText());
+        float chlorides = Float.parseFloat(textField5.getText());
+        int freeSulfurDioxide = Integer.parseInt(textField6.getText());
+        int totalSulfurDioxide = Integer.parseInt(textField7.getText());
+        float density = Float.parseFloat(textField8.getText());
+        float pH = Float.parseFloat(textField9.getText());
+        float sulphates = Float.parseFloat(textField10.getText());
+        float alcohol = Float.parseFloat(textField11.getText());
+        
+        Wine wine = new Wine(fixedAcidity,volatileAcidity,citricAcid,residualSugar,chlorides,freeSulfurDioxide,
+        totalSulfurDioxide,density,pH,sulphates,alcohol);
+        
+    }//GEN-LAST:event_predictBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,7 +412,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea myModel;
     private javax.swing.JButton predictBtn;
     private javax.swing.JTextField textField1;
     private javax.swing.JTextField textField10;
