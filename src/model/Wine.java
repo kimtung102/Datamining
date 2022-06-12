@@ -4,24 +4,32 @@
  */
 package model;
 
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Utils;
+
 /**
  *
  * @author Admin
  */
 public class Wine {
+
     private float fixedAcidity;
     private float volatileAcidity;
     private float citricAcid;
     private float residualSugar;
     private float chlorides;
-    private int freeSulfurDioxide;
-    private int totalSulfurDioxide;
+    private float freeSulfurDioxide;
+    private float totalSulfurDioxide;
     private float density;
     private float pH;
     private float sulphates;
     private float alcohol;
 
-    public Wine(float fixedAcidity, float volatileAcidity, float citricAcid, float residualSugar, float chlorides, int freeSulfurDioxide, int totalSulfurDioxide, float density, float pH, float sulphates, float alcohol) {
+    public Wine(float fixedAcidity, float volatileAcidity, float citricAcid, float residualSugar, float chlorides, float freeSulfurDioxide, float totalSulfurDioxide, float density, float pH, float sulphates, float alcohol) {
         this.fixedAcidity = fixedAcidity;
         this.volatileAcidity = volatileAcidity;
         this.citricAcid = citricAcid;
@@ -36,12 +44,57 @@ public class Wine {
     }
 
     public Wine() {
+
+    }
+
+    public void dataToArff() throws Exception {
+        FastVector atts;
+        FastVector attVals;
+        Instances data;
+        double[] vals;
+        int i;
+
+        atts = new FastVector();
+        atts.addElement(new Attribute("fixed acidity"));
+        atts.addElement(new Attribute("volatile acidity"));
+        atts.addElement(new Attribute("citric acid"));
+        atts.addElement(new Attribute("residual sugar"));
+        atts.addElement(new Attribute("chlorides"));
+        atts.addElement(new Attribute("free sulfur dioxide"));
+        atts.addElement(new Attribute("total sulfur dioxide"));
+        atts.addElement(new Attribute("density"));
+        atts.addElement(new Attribute("pH"));
+        atts.addElement(new Attribute("sulphates"));
+        atts.addElement(new Attribute("alcohol"));
         
+        attVals = new FastVector();
+        for (i = 1; i <= 10; i++) attVals.addElement(String.valueOf(i));
+        atts.addElement(new Attribute("quality", attVals));
+        // 2. create Instances object
+        data = new Instances("test", atts, 0);
+        // 3. fill with data
+        // first instance
+        vals = new double[data.numAttributes()];
+        // - numeric
+        vals[0] = fixedAcidity;
+        vals[1] = volatileAcidity;
+        vals[2] = citricAcid;
+        vals[3] = residualSugar;
+        vals[4] = chlorides;
+        vals[5] = freeSulfurDioxide;
+        vals[6] = totalSulfurDioxide;
+        vals[7] = density;
+        vals[8] = pH;
+        vals[9] = sulphates;
+        vals[10] = alcohol;
+        vals[11] = Utils.missingValue();
+        
+        data.add(new DenseInstance(1.0, vals));
+        // 4. output data
+        System.out.println(data);
+
     }
-    public Wine( float fixedAcidity) {
-        this.fixedAcidity = fixedAcidity;
-    }
-    
+
     public float getFixedAcidity() {
         return fixedAcidity;
     }
@@ -86,7 +139,7 @@ public class Wine {
         return freeSulfurDioxide;
     }
 
-    public void setFreeSulfurDioxide(int freeSulfurDioxide) {
+    public void setFreeSulfurDioxide(float freeSulfurDioxide) {
         this.freeSulfurDioxide = freeSulfurDioxide;
     }
 
@@ -94,7 +147,7 @@ public class Wine {
         return totalSulfurDioxide;
     }
 
-    public void setTotalSulfurDioxide(int totalSulfurDioxide) {
+    public void setTotalSulfurDioxide(float totalSulfurDioxide) {
         this.totalSulfurDioxide = totalSulfurDioxide;
     }
 
@@ -128,5 +181,5 @@ public class Wine {
 
     public void setAlcohol(float alcohol) {
         this.alcohol = alcohol;
-    }   
+    }
 }

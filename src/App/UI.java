@@ -4,6 +4,8 @@
  */
 package App;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Wine;
 
 /**
@@ -349,8 +351,8 @@ public class UI extends javax.swing.JFrame {
         float citricAcid = Float.parseFloat(textField3.getText());
         float residualSugar = Float.parseFloat(textField4.getText());
         float chlorides = Float.parseFloat(textField5.getText());
-        int freeSulfurDioxide = Integer.parseInt(textField6.getText());
-        int totalSulfurDioxide = Integer.parseInt(textField7.getText());
+        float freeSulfurDioxide = Float.parseFloat(textField6.getText());
+        float totalSulfurDioxide = Float.parseFloat(textField7.getText());
         float density = Float.parseFloat(textField8.getText());
         float pH = Float.parseFloat(textField9.getText());
         float sulphates = Float.parseFloat(textField10.getText());
@@ -358,7 +360,11 @@ public class UI extends javax.swing.JFrame {
         
         Wine wine = new Wine(fixedAcidity,volatileAcidity,citricAcid,residualSugar,chlorides,freeSulfurDioxide,
         totalSulfurDioxide,density,pH,sulphates,alcohol);
-        
+        try {
+            wine.dataToArff();
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_predictBtnActionPerformed
 
     /**
