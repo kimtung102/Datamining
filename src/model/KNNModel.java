@@ -43,7 +43,8 @@ public class KNNModel extends KnowledgeModel{
         int folds = 10;
         eval = new Evaluation(this.trainset);
         eval.crossValidateModel(knn, this.testset, folds, rnd);
-        String str = eval.toSummaryString("\nKet qua danh gia mo hinh 10-fold cross-validation\n-----\n",false);
+        String str = eval.toSummaryString("\nKết quả đánh giá mô hình 10-fold Cross-validation\n-----------------"
+                + "-------------------------------------------\n",false);
         return str;
     }
  
@@ -56,7 +57,6 @@ public class KNNModel extends KnowledgeModel{
         for(int i = 0;i<unlabel.numInstances();i++){
             double predict = knn.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
-            System.out.println(predict);
         }
         //Xuat ket qua ra file out
         BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileOut));

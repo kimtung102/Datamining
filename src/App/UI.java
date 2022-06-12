@@ -20,7 +20,7 @@ public class UI extends javax.swing.JFrame {
      * @throws java.lang.Exception
      */
     public final void trainModel () throws Exception {
-        model = new KNNModel("", "-K 3 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"", null);
+        model = new KNNModel("", "-K 4 -W 0 -X -I -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"", null);
         model.buildkNN("D:\\wine-data\\train.arff");
         String str = model.evalutekNN("D:\\wine-data\\validation.arff");
         myModel.setText(str);
