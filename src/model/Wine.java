@@ -110,6 +110,57 @@ public class Wine {
         
     }
 
+    public Instance getInstanceData() {
+        FastVector atts;
+        FastVector attVals;
+        Instances data;
+        double[] vals;
+        int i;
+
+        //setup attribute
+        atts = new FastVector();
+        //numberic
+        atts.addElement(new Attribute("fixed acidity"));
+        atts.addElement(new Attribute("volatile acidity"));
+        atts.addElement(new Attribute("citric acid"));
+        atts.addElement(new Attribute("residual sugar"));
+        atts.addElement(new Attribute("chlorides"));
+        atts.addElement(new Attribute("free sulfur dioxide"));
+        atts.addElement(new Attribute("total sulfur dioxide"));
+        atts.addElement(new Attribute("density"));
+        atts.addElement(new Attribute("pH"));
+        atts.addElement(new Attribute("sulphates"));
+        atts.addElement(new Attribute("alcohol"));
+        //nominal
+        attVals = new FastVector();
+        for (i = 3; i <= 8; i++) {
+            attVals.addElement(String.valueOf(i));
+        }
+        atts.addElement(new Attribute("quality", attVals));
+        
+        // create Instances object
+        data = new Instances("test", atts, 0);
+        // fill data
+        // my instance
+        vals = new double[data.numAttributes()];
+        // - numeric
+        vals[0] = fixedAcidity;
+        vals[1] = volatileAcidity;
+        vals[2] = citricAcid;
+        vals[3] = residualSugar;
+        vals[4] = chlorides;
+        vals[5] = freeSulfurDioxide;
+        vals[6] = totalSulfurDioxide;
+        vals[7] = density;
+        vals[8] = pH;
+        vals[9] = sulphates;
+        vals[10] = alcohol;
+        //missing value for predict
+        vals[11] = Utils.missingValue();
+        //add
+        return new DenseInstance(1.0, vals);
+    }
+    
     public float getFixedAcidity() {
         return fixedAcidity;
     }

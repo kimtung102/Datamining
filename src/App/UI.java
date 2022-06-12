@@ -418,9 +418,10 @@ public class UI extends javax.swing.JFrame {
         totalSulfurDioxide,density,pH,sulphates,alcohol);
         
         try {
-            wine.dataToArff();
-            model.predictClassLabel(currentPath + "\\data\\wine-unlabel.arff", currentPath + "\\data\\wine-predict.arff");
-            readArff();
+//            wine.dataToArff();
+//            model.predictClassLabel(currentPath + "\\data\\wine-unlabel.arff", currentPath + "\\data\\wine-predict.arff");
+//            readArff();
+            resultText.setText("Chat luong ruou: " + model.predictOneClassLabel(currentPath + "\\data\\wine-unlabel.arff",wine.getInstanceData()));
             jDialog1.setSize(new Dimension(400, 400));
             jDialog1.setVisible(true);
         } catch (Exception ex) {

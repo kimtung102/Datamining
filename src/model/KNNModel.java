@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import weka.classifiers.Evaluation;
 import weka.classifiers.lazy.IBk;
+import weka.core.Attribute;
 import weka.core.Debug;
 import weka.core.Debug.Random;
 import weka.core.Instance;
@@ -19,8 +20,8 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 import weka.core.converters.ConverterUtils.DataSource;
 
+public class KNNModel extends KnowledgeModel {
 
-public class KNNModel extends KnowledgeModel{
     IBk knn;
     Evaluation eval;
 
@@ -28,15 +29,15 @@ public class KNNModel extends KnowledgeModel{
         super(filename, m_opts, d_opts);
     }
 
-    public void buildkNN(String filename) throws Exception{
+    public void buildkNN(String filename) throws Exception {
         setTrainset(filename);
         this.trainset.setClassIndex(this.trainset.numAttributes() - 1);
         this.knn = new IBk();
         knn.setOptions(model_options);
         knn.buildClassifier(this.trainset);
     }
-    
-    public String evalutekNN(String filename) throws Exception{
+
+    public String evalutekNN(String filename) throws Exception {
         setTestset(filename);
         this.testset.setClassIndex(this.testset.numAttributes() - 1);
         Random rnd = new Random(1);
@@ -44,20 +45,22 @@ public class KNNModel extends KnowledgeModel{
         eval = new Evaluation(this.trainset);
         eval.crossValidateModel(knn, this.testset, folds, rnd);
         String str = eval.toSummaryString("\nKết quả đánh giá mô hình 10-fold Cross-validation\n-----------------"
-                + "-------------------------------------------\n",false);
+                + "-------------------------------------------\n", false);
         return str;
     }
- 
-    public void predictClassLabel(String fileIn,String fileOut) throws Exception{
+
+    public void predictClassLabel(String fileIn, String fileOut) throws Exception {
         //Doc du lieu can du doan vao bo nho: file unlabel
         DataSource ds = new DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
-        unlabel.setClassIndex(unlabel.numAttributes()-1);
+        unlabel.setClassIndex(unlabel.numAttributes() - 1);
         //Du doan classLabel cho tung instances
-        for(int i = 0;i<unlabel.numInstances();i++){
+        for (int i = 0; i < unlabel.numInstances(); i++) {
             double predict = knn.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
-            System.out.println(predict);
+            Attribute quality = unlabel.instance(i).attribute(11);
+            //System.out.println(unlabel.instance(i).toString(quality));
+            System.out.println(unlabel.instance(i));
         }
         //Xuat ket qua ra file out
         BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileOut));
@@ -67,8 +70,20 @@ public class KNNModel extends KnowledgeModel{
         outWriter.close();
     }
 
+    public String predictOneClassLabel(String fileIn, Instance data) throws Exception {
+        //Doc du lieu can du doan vao bo nho: file unlabel
+        DataSource ds = new DataSource(fileIn);
+        Instances unlabel = ds.getDataSet();
+        unlabel.setClassIndex(unlabel.numAttributes() - 1);
+        data.setDataset(unlabel);
+        double predict = knn.classifyInstance(data);
+        data.setClassValue(predict);
+        Attribute quality = data.attribute(11);
+        return data.toString(quality);
+    }
+
     @Override
     public String toString() {
         return eval.toString(); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
 }
