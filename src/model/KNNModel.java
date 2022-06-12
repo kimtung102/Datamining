@@ -57,6 +57,7 @@ public class KNNModel extends KnowledgeModel{
         for(int i = 0;i<unlabel.numInstances();i++){
             double predict = knn.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
+            System.out.println(predict);
         }
         //Xuat ket qua ra file out
         BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileOut));

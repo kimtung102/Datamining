@@ -105,6 +105,8 @@ public class Wine {
         outWriter.newLine();
         outWriter.flush();
         outWriter.close();
+        
+        
     }
 
     public float getFixedAcidity() {
