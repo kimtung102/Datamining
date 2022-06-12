@@ -6,6 +6,7 @@ package App;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.KNNModel;
 import model.Wine;
 
 /**
@@ -13,12 +14,21 @@ import model.Wine;
  * @author Admin
  */
 public class UI extends javax.swing.JFrame {
-
+       KNNModel model;
     /**
      * Creates new form NewJFrame
+     * @throws java.lang.Exception
      */
-    public UI() {
+    public final void trainModel () throws Exception {
+        model = new KNNModel("", "-K 3 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"", null);
+        model.buildkNN("D:\\wine-data\\train.arff");
+        String str = model.evalutekNN("D:\\wine-data\\validation.arff");
+        myModel.setText(str);
+    }
+    
+    public UI() throws Exception {
         initComponents();
+        trainModel();
     }
 
     /**
@@ -360,8 +370,10 @@ public class UI extends javax.swing.JFrame {
         
         Wine wine = new Wine(fixedAcidity,volatileAcidity,citricAcid,residualSugar,chlorides,freeSulfurDioxide,
         totalSulfurDioxide,density,pH,sulphates,alcohol);
+        
         try {
             wine.dataToArff();
+            model.predictClassLabel("D:\\wine-data\\wine-unlabel.arff", "D:\\wine-data\\wine-predict.arff");
         } catch (Exception ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -396,9 +408,11 @@ public class UI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
                 new UI().setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

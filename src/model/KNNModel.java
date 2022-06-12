@@ -36,15 +36,15 @@ public class KNNModel extends KnowledgeModel{
         knn.buildClassifier(this.trainset);
     }
     
-    public void evalutekNN(String filename) throws Exception{
+    public String evalutekNN(String filename) throws Exception{
         setTestset(filename);
         this.testset.setClassIndex(this.testset.numAttributes() - 1);
         Random rnd = new Random(1);
         int folds = 10;
         eval = new Evaluation(this.trainset);
         eval.crossValidateModel(knn, this.testset, folds, rnd);
-        System.out.println(eval.toSummaryString("\nKet qua danh gia mo hinh 10-fold cross-validation\n-----\n",false));
-        
+        String str = eval.toSummaryString("\nKet qua danh gia mo hinh 10-fold cross-validation\n-----\n",false);
+        return str;
     }
  
     public void predictClassLabel(String fileIn,String fileOut) throws Exception{
