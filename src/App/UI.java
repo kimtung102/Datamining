@@ -19,18 +19,20 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class UI extends javax.swing.JFrame {
        KNNModel model;
+       public static String currentPath = System.getProperty("user.dir");
     /**
      * Creates new form NewJFrame
      * @throws java.lang.Exception
      */
     public final void trainModel () throws Exception {
         model = new KNNModel("", "-K 4 -W 0 -X -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"", null);
-        model.buildkNN("D:\\wine-data\\train.arff");
-        String str = model.evalutekNN("D:\\wine-data\\validation.arff");
+        model.buildkNN(currentPath + "\\data\\train.arff");
+        String str = model.evalutekNN(currentPath + "\\data\\validation.arff");
         myModel.setText(str);
+        System.out.println(currentPath);
     }
     public void readArff() throws Exception {
-        DataSource ds = new DataSource("D:\\wine-data\\wine-predict.arff");
+        DataSource ds = new DataSource(currentPath + "\\data\\wine-predict.arff");
         Instances data = ds.getDataSet();
         resultText.setText(data.toString());
     }
@@ -417,7 +419,7 @@ public class UI extends javax.swing.JFrame {
         
         try {
             wine.dataToArff();
-            model.predictClassLabel("D:\\wine-data\\wine-unlabel.arff", "D:\\wine-data\\wine-predict.arff");
+            model.predictClassLabel(currentPath + "\\data\\wine-unlabel.arff", currentPath + "\\data\\wine-predict.arff");
             readArff();
             jDialog1.setSize(new Dimension(400, 400));
             jDialog1.setVisible(true);

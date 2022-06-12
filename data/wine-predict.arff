@@ -1,0 +1,17 @@
+@relation test
+
+@attribute 'fixed acidity' numeric
+@attribute 'volatile acidity' numeric
+@attribute 'citric acid' numeric
+@attribute 'residual sugar' numeric
+@attribute chlorides numeric
+@attribute 'free sulfur dioxide' numeric
+@attribute 'total sulfur dioxide' numeric
+@attribute density numeric
+@attribute pH numeric
+@attribute sulphates numeric
+@attribute alcohol numeric
+@attribute quality {3,4,5,6,7,8}
+
+@data
+1,1,1,1,2,2,3,1,2,2,3,4
