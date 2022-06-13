@@ -60,7 +60,7 @@ public class KNNModel extends KnowledgeModel {
             unlabel.instance(i).setClassValue(predict);
             Attribute quality = unlabel.instance(i).attribute(11);
             //System.out.println(unlabel.instance(i).toString(quality));
-            System.out.println(unlabel.instance(i));
+            System.out.println(quality);
         }
         //Xuat ket qua ra file out
         BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileOut));
