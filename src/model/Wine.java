@@ -99,13 +99,14 @@ public class Wine {
         vals[11] = Utils.missingValue();
         //add
         data.add(new DenseInstance(1.0, vals));
-
+        System.out.println(data);
+        
         //xuat data ra file arff
-        BufferedWriter outWriter = new BufferedWriter(new FileWriter(currentPath + "\\data\\wine-unlabel.arff"));
-        outWriter.write(data.toString());
-        outWriter.newLine();
-        outWriter.flush();
-        outWriter.close();
+//        BufferedWriter outWriter = new BufferedWriter(new FileWriter(currentPath + "\\data\\wine-unlabel.arff"));
+//        outWriter.write(data.toString());
+//        outWriter.newLine();
+//        outWriter.flush();
+//        outWriter.close();
         
         
     }
