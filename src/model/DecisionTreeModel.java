@@ -35,7 +35,7 @@ public class DecisionTreeModel extends KnowledgeModel {
         tree.buildClassifier(this.trainset);
     }
 
-    public String evalutekNN(String filename) throws Exception {
+    public String evaluteTree(String filename) throws Exception {
         setTestset(filename);
         this.testset.setClassIndex(this.testset.numAttributes() - 1);
         Random rnd = new Random(1);
