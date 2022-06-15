@@ -4,59 +4,63 @@
  */
 package model;
 
-/**
- *
- * @author Admin
- */
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import weka.classifiers.Evaluation;
-import weka.classifiers.lazy.IBk;
+import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Attribute;
 import weka.core.Debug;
-import weka.core.Debug.Random;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
-import weka.core.converters.ConverterUtils.DataSource;
 
-public class KNNModel extends KnowledgeModel {
+/**
+ *
+ * @author tranluan
+ */
+public class NeuralNetworkModel extends KnowledgeModel {
 
-    public IBk knn;
+    public MultilayerPerceptron neural;
     Evaluation eval;
 
-    public KNNModel(String filename, String m_opts, String d_opts) throws Exception {
+    public NeuralNetworkModel() {
+        super();
+    }
+
+    public NeuralNetworkModel(String filename, String m_opts, String d_opts) throws Exception {
         super(filename, m_opts, d_opts);
     }
 
-    public void buildkNN(String filename) throws Exception {
+    public void buildNeuralNetwork(String filename) throws Exception {
+        // Doc train set vao bo nho
         setTrainset(filename);
         this.trainset.setClassIndex(this.trainset.numAttributes() - 1);
-        this.knn = new IBk();
-        knn.setOptions(model_options);
-        knn.buildClassifier(this.trainset);
+        //Huan luyen mo hinh mang neural
+        this.neural = new MultilayerPerceptron();
+        neural.setOptions(this.model_options);
+        neural.buildClassifier(this.trainset);
     }
 
-    public String evalutekNN(String filename) throws Exception {
+    public String evaluateNeuralNetwork(String filename) throws Exception {
         setTestset(filename);
         this.testset.setClassIndex(this.testset.numAttributes() - 1);
-        Random rnd = new Random(1);
+        Debug.Random rnd = new Debug.Random(1);
         int folds = 10;
         eval = new Evaluation(this.trainset);
-        eval.crossValidateModel(knn, this.testset, folds, rnd);
-        String str = eval.toSummaryString("\nKNNModel 10-fold Cross-validation\n-----------------"
+        eval.crossValidateModel(neural, this.testset, folds, rnd);
+        String str = eval.toSummaryString("\nNeuralNetworkModel 10-fold Cross-validation\n-----------------"
                 + "-------------------------------------------\n", false);
         return str;
     }
 
     public Instances predictClassLabel(String fileIn) throws Exception {
         //Doc du lieu can du doan vao bo nho: file unlabel
-        DataSource ds = new DataSource(fileIn);
+        ConverterUtils.DataSource ds = new ConverterUtils.DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
         unlabel.setClassIndex(unlabel.numAttributes() - 1);
         //Du doan classLabel cho tung instances
         for (int i = 0; i < unlabel.numInstances(); i++) {
-            double predict = knn.classifyInstance(unlabel.instance(i));
+            double predict = neural.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
             Attribute quality = unlabel.instance(i).attribute(11);
             //System.out.println(unlabel.instance(i).toString(quality));
@@ -67,11 +71,11 @@ public class KNNModel extends KnowledgeModel {
 
     public String predictOneClassLabel(String fileIn, Instance data) throws Exception {
         //Doc du lieu can du doan vao bo nho: file unlabel
-        DataSource ds = new DataSource(fileIn);
+        ConverterUtils.DataSource ds = new ConverterUtils.DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
         unlabel.setClassIndex(unlabel.numAttributes() - 1);
         data.setDataset(unlabel);
-        double predict = knn.classifyInstance(data);
+        double predict = neural.classifyInstance(data);
         data.setClassValue(predict);
         Attribute quality = data.attribute(11);
         return data.toString(quality);
