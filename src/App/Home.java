@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,6 +15,11 @@ import model.KNNModel;
 import model.NaiveBayesModel;
 import model.NeuralNetworkModel;
 import model.SVMModel;
+import model.Wine;
+import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.functions.MultilayerPerceptron;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.J48;
 
 /*
@@ -105,6 +111,8 @@ public class Home extends javax.swing.JFrame {
         predictBtn = new javax.swing.JButton();
         exportBtn = new javax.swing.JButton();
         predictFileBtn = new javax.swing.JButton();
+        modelTypeComboBox = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
         closeBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -551,6 +559,11 @@ public class Home extends javax.swing.JFrame {
         predictBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         predictBtn.setFocusPainted(false);
         predictBtn.setFocusable(false);
+        predictBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                predictBtnActionPerformed(evt);
+            }
+        });
 
         exportBtn.setBackground(new java.awt.Color(255, 82, 82));
         exportBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -580,10 +593,84 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        modelTypeComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        modelTypeComboBox.setForeground(new java.awt.Color(255, 0, 0));
+        modelTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Decision tree", "KNN", "Naive Bayes", "Neural Network", "Support Vector Machine(SVM)" }));
+        modelTypeComboBox.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
+        modelTypeComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modelTypeComboBox.setFocusable(false);
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 82, 82));
+        jLabel15.setText("Model type");
+
         javax.swing.GroupLayout classificationPanelLayout = new javax.swing.GroupLayout(classificationPanel);
         classificationPanel.setLayout(classificationPanelLayout);
         classificationPanelLayout.setHorizontalGroup(
             classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(classificationPanelLayout.createSequentialGroup()
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(classificationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textField10, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(classificationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textField11, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(classificationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(classificationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
+                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textField9, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
+                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(classificationPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textField8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(classificationPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(classificationPanelLayout.createSequentialGroup()
+                                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel12))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(188, 188, 188)))
+                        .addContainerGap())
+                    .addGroup(classificationPanelLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(predictBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(predictFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,65 +679,10 @@ public class Home extends javax.swing.JFrame {
                         .addGap(88, 88, 88))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
-                        .addComponent(predictBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(predictFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(classificationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField10, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(classificationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField11, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(classificationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(classificationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
-                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField9, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classificationPanelLayout.createSequentialGroup()
-                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(classificationPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textField8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(classificationPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(classificationPanelLayout.createSequentialGroup()
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel12))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(188, 188, 188)))
-                .addContainerGap())
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(modelTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(162, 162, 162))))
         );
         classificationPanelLayout.setVerticalGroup(
             classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -660,43 +692,33 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(classificationPanelLayout.createSequentialGroup()
-                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(classificationPanelLayout.createSequentialGroup()
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(textField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(classificationPanelLayout.createSequentialGroup()
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(textField6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(textField7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(textField8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(predictBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(predictFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(textField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(classificationPanelLayout.createSequentialGroup()
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(textField6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(textField7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(textField8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(classificationPanelLayout.createSequentialGroup()
                         .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -712,8 +734,19 @@ public class Home extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(textField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modelTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(classificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(predictBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(predictFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         backroundPanel.add(classificationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 610, 560));
@@ -999,6 +1032,134 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chooseEvaluateFileBtnActionPerformed
 
+    public void predictData(Wine wine) {
+        String pathUnlabel = currentPath + "\\data\\wine-unlabel.arff";
+        switch (modelTypeComboBox.getSelectedIndex()) {
+            case 0 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\decisionTreeModel.model";
+                    if (new File(pathModel).isFile()) {
+                        DecisionTreeModel model = new DecisionTreeModel("", "", null);
+                        model.tree = (J48) model.loadModel(pathModel);
+                        String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
+                        JOptionPane.showMessageDialog(null, "Wine qualification predict by DecisionTreeModel(1-10): " + res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case 1 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\KNNModel.model";
+                    if (new File(pathModel).isFile()) {
+                        KNNModel model = new KNNModel("", "", null);
+                        model.knn = (IBk) model.loadModel(pathModel);
+                        String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
+                        JOptionPane.showMessageDialog(null, "Wine qualification predict by KNNModel(1-10): " + res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case 2 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\naiveBayesModel.model";
+                    if (new File(pathModel).isFile()) {
+                        NaiveBayesModel model = new NaiveBayesModel("", "", null);
+                        model.nbayes = (NaiveBayes) model.loadModel(pathModel);
+                        String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
+                        JOptionPane.showMessageDialog(null, "Wine qualification predict by NaiveBayesModel(1-10): " + res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case 3 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\neuralNetworkModel.model";
+                    if (new File(pathModel).isFile()) {
+                        NeuralNetworkModel model = new NeuralNetworkModel("", "", null);
+                        model.neural = (MultilayerPerceptron) model.loadModel(pathModel);
+                        String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
+                        JOptionPane.showMessageDialog(null, "Wine qualification predict by NeuralNetworkModel(1-10): " + res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case 4 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\SVMModel.model";
+                    if (new File(pathModel).isFile()) {
+                        SVMModel model = new SVMModel("", "", null);
+                        model.svm = (SMO) model.loadModel(pathModel);
+                        String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
+                        JOptionPane.showMessageDialog(null, "Wine qualification predict by SVMModel(1-10): " + res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            default -> {
+                try {
+                    String pathModel = currentPath + "\\model\\KNNModel.model";
+                    if (new File(pathModel).isFile()) {
+                        KNNModel model = new KNNModel("", "", null);
+                        model.knn = (IBk) model.loadModel(pathModel);
+                        String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
+                        JOptionPane.showMessageDialog(null, "Wine qualification predict by KNNModel(1-10): " + res);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    private void predictBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictBtnActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        float fixedAcidity = Float.parseFloat(textField1.getText());
+        float volatileAcidity = Float.parseFloat(textField2.getText());
+        float citricAcid = Float.parseFloat(textField3.getText());
+        float residualSugar = Float.parseFloat(textField4.getText());
+        float chlorides = Float.parseFloat(textField5.getText());
+        float freeSulfurDioxide = Float.parseFloat(textField6.getText());
+        float totalSulfurDioxide = Float.parseFloat(textField7.getText());
+        float density = Float.parseFloat(textField8.getText());
+        float pH = Float.parseFloat(textField9.getText());
+        float sulphates = Float.parseFloat(textField10.getText());
+        float alcohol = Float.parseFloat(textField11.getText());
+
+        Wine wine = new Wine(fixedAcidity, volatileAcidity, citricAcid, residualSugar, chlorides, freeSulfurDioxide,
+                totalSulfurDioxide, density, pH, sulphates, alcohol);
+
+        try {
+//            wine.dataToArff();
+//          model.predictClassLabel(currentPath + "\\data\\wine-unlabel.arff", currentPath + "\\data\\wine-predict.arff");
+//          readArff();
+
+            predictData(wine);
+            //String mess = "Kết quả dự đoán (1-10): " + model.predictOneClassLabel(currentPath + "\\data\\wine-unlabel.arff", wine.getInstanceData());
+            //JOptionPane.showMessageDialog(null, mess);
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_predictBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1059,6 +1220,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1070,6 +1232,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JComboBox<String> modelTypeComboBox;
     private javax.swing.JTextField pathEvaluateTextField;
     private javax.swing.JTextField pathTrainTextField;
     private javax.swing.JButton predictBtn;
