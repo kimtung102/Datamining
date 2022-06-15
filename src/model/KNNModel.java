@@ -49,7 +49,7 @@ public class KNNModel extends KnowledgeModel {
         return str;
     }
 
-    public void predictClassLabel(String fileIn, String fileOut) throws Exception {
+    public Instances predictClassLabel(String fileIn) throws Exception {
         //Doc du lieu can du doan vao bo nho: file unlabel
         DataSource ds = new DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
@@ -62,12 +62,7 @@ public class KNNModel extends KnowledgeModel {
             //System.out.println(unlabel.instance(i).toString(quality));
             System.out.println(quality);
         }
-        //Xuat ket qua ra file out
-        BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileOut));
-        outWriter.write(unlabel.toString());
-        outWriter.newLine();
-        outWriter.flush();
-        outWriter.close();
+        return unlabel;
     }
 
     public String predictOneClassLabel(String fileIn, Instance data) throws Exception {

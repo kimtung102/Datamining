@@ -25,7 +25,9 @@ public class KnowledgeModel {
     String[] data_options;
     Instances trainset;
     Instances testset;
-
+    public KnowledgeModel() {
+        
+    }
     public KnowledgeModel(String filename, String m_opts, String d_opts) throws Exception {
         if (!filename.isEmpty()) {
             this.source = new DataSource(filename);
@@ -41,10 +43,6 @@ public class KnowledgeModel {
         }
     }
 
-    KnowledgeModel() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public void saveData(String filename, Instances dataset) throws IOException {
         ArffSaver outData = new ArffSaver();
         outData.setInstances(dataset);
@@ -56,6 +54,14 @@ public class KnowledgeModel {
     public void saveData2CSV(String filename) throws IOException {
         CSVSaver outData = new CSVSaver();
         outData.setInstances(this.dataset);
+        outData.setFile(new File(filename));
+        outData.writeBatch();
+        System.out.println("saved");
+    }
+
+    public void saveData2CSVByInstance(String filename, Instances data) throws IOException {
+        CSVSaver outData = new CSVSaver();
+        outData.setInstances(data);
         outData.setFile(new File(filename));
         outData.writeBatch();
         System.out.println("saved");

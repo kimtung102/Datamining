@@ -5,13 +5,18 @@ import java.util.logging.Logger;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import model.DecisionTreeModel;
 import model.KNNModel;
+import model.KnowledgeModel;
 import model.NaiveBayesModel;
 import model.NeuralNetworkModel;
 import model.SVMModel;
@@ -21,6 +26,7 @@ import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.J48;
+import weka.core.Instances;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -30,7 +36,7 @@ import weka.classifiers.trees.J48;
  *
  * @author tranluan
  */
-public class Home extends javax.swing.JFrame {
+public final class Home extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
@@ -40,6 +46,7 @@ public class Home extends javax.swing.JFrame {
     NaiveBayesModel naiveBayesModel;
     NeuralNetworkModel neuralNetworkModel;
     SVMModel SVMModel;
+    Instances labelData;
     public String currentPath = System.getProperty("user.dir");
 
     public Home() {
@@ -295,6 +302,7 @@ public class Home extends javax.swing.JFrame {
         pathEvaluateTextField.setBackground(new java.awt.Color(255, 245, 245));
         pathEvaluateTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pathEvaluateTextField.setForeground(new java.awt.Color(255, 82, 82));
+        pathEvaluateTextField.setToolTipText("");
         pathEvaluateTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         trainPathLine1.setBackground(new java.awt.Color(255, 82, 82));
@@ -339,7 +347,7 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(trainPathLine1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chooseEvaluateFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(chooseEvaluateFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(chooseTrainFileBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(trainPanelLayout.createSequentialGroup()
                         .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,11 +417,6 @@ public class Home extends javax.swing.JFrame {
 
         textField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField1.setForeground(new java.awt.Color(255, 82, 82));
-        textField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField1ActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 82, 82));
@@ -421,19 +424,9 @@ public class Home extends javax.swing.JFrame {
 
         textField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField4.setForeground(new java.awt.Color(255, 82, 82));
-        textField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField4ActionPerformed(evt);
-            }
-        });
 
         textField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField10.setForeground(new java.awt.Color(255, 82, 82));
-        textField10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField10ActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 82, 82));
@@ -445,11 +438,6 @@ public class Home extends javax.swing.JFrame {
 
         textField11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField11.setForeground(new java.awt.Color(255, 82, 82));
-        textField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField11ActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 82, 82));
@@ -457,19 +445,9 @@ public class Home extends javax.swing.JFrame {
 
         textField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField2.setForeground(new java.awt.Color(255, 82, 82));
-        textField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField2ActionPerformed(evt);
-            }
-        });
 
         textField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField8.setForeground(new java.awt.Color(255, 82, 82));
-        textField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField8ActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 82, 82));
@@ -477,11 +455,6 @@ public class Home extends javax.swing.JFrame {
 
         textField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField9.setForeground(new java.awt.Color(255, 82, 82));
-        textField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField9ActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 82, 82));
@@ -493,11 +466,6 @@ public class Home extends javax.swing.JFrame {
 
         textField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField3.setForeground(new java.awt.Color(255, 82, 82));
-        textField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField3ActionPerformed(evt);
-            }
-        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 82, 82));
@@ -505,19 +473,9 @@ public class Home extends javax.swing.JFrame {
 
         textField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField5.setForeground(new java.awt.Color(255, 82, 82));
-        textField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField5ActionPerformed(evt);
-            }
-        });
 
         textField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField6.setForeground(new java.awt.Color(255, 82, 82));
-        textField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField6ActionPerformed(evt);
-            }
-        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 82, 82));
@@ -525,17 +483,12 @@ public class Home extends javax.swing.JFrame {
 
         textField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField7.setForeground(new java.awt.Color(255, 82, 82));
-        textField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField7ActionPerformed(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 82, 82));
         jLabel13.setText("Total sulfur dioxide:");
 
-        predictTable.setForeground(new java.awt.Color(255, 82, 82));
+        predictTable.setForeground(new java.awt.Color(51, 51, 51));
         predictTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -547,6 +500,7 @@ public class Home extends javax.swing.JFrame {
 
             }
         ));
+        predictTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         predictTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
         predictTable.setSelectionForeground(new java.awt.Color(255, 82, 82));
         jScrollPane3.setViewportView(predictTable);
@@ -966,56 +920,159 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveModelBtnActionPerformed
 
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField1ActionPerformed
-
-    private void textField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField4ActionPerformed
-
-    private void textField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField10ActionPerformed
-
-    private void textField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField11ActionPerformed
-
-    private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField2ActionPerformed
-
-    private void textField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField8ActionPerformed
-
-    private void textField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField9ActionPerformed
-
-    private void textField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField3ActionPerformed
-
-    private void textField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField5ActionPerformed
-
-    private void textField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField6ActionPerformed
-
-    private void textField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField7ActionPerformed
-
     private void exportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBtnActionPerformed
-        // TODO add your handling code here:
+        String fileName;
+        JFrame parentFrame = new JFrame();
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Specify a file to save");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Arff file", "arff");
+        chooser.setFileFilter(filter);
+
+        int userSelection = chooser.showSaveDialog(parentFrame);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = chooser.getSelectedFile();
+            fileName = fileToSave.getAbsolutePath();
+            if(!fileName.contains(".arff")) {
+                fileName += ".arff";
+            }
+            try {
+                KnowledgeModel model = new KnowledgeModel();
+                model.saveData(fileName, labelData);
+            } catch (IOException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_exportBtnActionPerformed
+
+    public void loadDataTempPredict() {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        predictTable.setModel(defaultTableModel);
+        String csvFile = currentPath + "\\data\\tempPredict.csv";
+        ArrayList<String[]> data = ReadCsv.read(csvFile);
+        if (data != null) {
+            for (String column : data.get(0)) {
+                defaultTableModel.addColumn(column.replaceAll("\'", "").toUpperCase());
+            }
+            for (int i = 1; i < data.size(); i++) {
+                defaultTableModel.addRow(data.get(i));
+            }
+        }
+    }
 
     private void predictFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictFileBtnActionPerformed
         // TODO add your handling code here:
+        String pathUnlabel = "";
+        JFileChooser chooser = getFileViaUI("Arff File", "arff");
+        if (chooser != null) {
+            pathUnlabel = chooser.getSelectedFile().getPath();
+        } else {
+            return;
+        }
+        switch (modelTypeComboBox.getSelectedIndex()) {
+            case 0 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\decisionTreeModel.model";
+                    if (new File(pathModel).isFile()) {
+                        DecisionTreeModel model = new DecisionTreeModel("", "", null);
+                        model.tree = (J48) model.loadModel(pathModel);
+                        labelData = model.predictClassLabel(pathUnlabel);
+                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        loadDataTempPredict();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case 1 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\KNNModel.model";
+                    if (new File(pathModel).isFile()) {
+                        KNNModel model = new KNNModel("", "", null);
+                        model.knn = (IBk) model.loadModel(pathModel);
+                        labelData = model.predictClassLabel(pathUnlabel);
+                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        loadDataTempPredict();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case 2 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\naiveBayesModel.model";
+                    if (new File(pathModel).isFile()) {
+                        NaiveBayesModel model = new NaiveBayesModel("", "", null);
+                        model.nbayes = (NaiveBayes) model.loadModel(pathModel);
+                        labelData = model.predictClassLabel(pathUnlabel);
+                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        loadDataTempPredict();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case 3 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\neuralNetworkModel.model";
+                    if (new File(pathModel).isFile()) {
+                        NeuralNetworkModel model = new NeuralNetworkModel("", "", null);
+                        model.neural = (MultilayerPerceptron) model.loadModel(pathModel);
+                        labelData = model.predictClassLabel(pathUnlabel);
+                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        loadDataTempPredict();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case 4 -> {
+                try {
+                    String pathModel = currentPath + "\\model\\SVMModel.model";
+                    if (new File(pathModel).isFile()) {
+                        SVMModel model = new SVMModel("", "", null);
+                        model.svm = (SMO) model.loadModel(pathModel);
+                        labelData = model.predictClassLabel(pathUnlabel);
+                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        loadDataTempPredict();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            default -> {
+                try {
+                    String pathModel = currentPath + "\\model\\KNNModel.model";
+                    if (new File(pathModel).isFile()) {
+                        KNNModel model = new KNNModel("", "", null);
+                        model.knn = (IBk) model.loadModel(pathModel);
+                        labelData = model.predictClassLabel(pathUnlabel);
+                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        loadDataTempPredict();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_predictFileBtnActionPerformed
 
     private void chooseTrainFileBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseTrainFileBtn1ActionPerformed
@@ -1045,9 +1102,11 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by DecisionTreeModel(1-10): " + res);
                     } else {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Home.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 1 -> {
@@ -1060,9 +1119,11 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by KNNModel(1-10): " + res);
                     } else {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Home.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 2 -> {
@@ -1075,9 +1136,11 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by NaiveBayesModel(1-10): " + res);
                     } else {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Home.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 3 -> {
@@ -1090,9 +1153,11 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by NeuralNetworkModel(1-10): " + res);
                     } else {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Home.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 4 -> {
@@ -1105,9 +1170,11 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by SVMModel(1-10): " + res);
                     } else {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Home.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -1121,16 +1188,17 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by KNNModel(1-10): " + res);
                     } else {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Home.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
 
     private void predictBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictBtnActionPerformed
-        // TODO add your handling code here:
         // TODO add your handling code here:
         float fixedAcidity = Float.parseFloat(textField1.getText());
         float volatileAcidity = Float.parseFloat(textField2.getText());
@@ -1148,15 +1216,11 @@ public class Home extends javax.swing.JFrame {
                 totalSulfurDioxide, density, pH, sulphates, alcohol);
 
         try {
-//            wine.dataToArff();
-//          model.predictClassLabel(currentPath + "\\data\\wine-unlabel.arff", currentPath + "\\data\\wine-predict.arff");
-//          readArff();
-
             predictData(wine);
-            //String mess = "Kết quả dự đoán (1-10): " + model.predictOneClassLabel(currentPath + "\\data\\wine-unlabel.arff", wine.getInstanceData());
-            //JOptionPane.showMessageDialog(null, mess);
+
         } catch (Exception ex) {
-            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UI.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_predictBtnActionPerformed
 
