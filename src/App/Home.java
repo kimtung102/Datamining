@@ -4,7 +4,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -748,25 +750,21 @@ public final class Home extends javax.swing.JFrame {
         hiddenPanel1.setVisible(false);
     }
     private void trainMenuLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trainMenuLabelMouseClicked
-        // TODO add your handling code here:
         changeColorMenu(backgroundTrainMenuPanel, backgroundClassificationMenuPanel);
         visiblePanel(trainPanel, classificationPanel);
     }//GEN-LAST:event_trainMenuLabelMouseClicked
 
     private void classificationMenuLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classificationMenuLabelMouseClicked
-        // TODO add your handling code here:
         changeColorMenu(backgroundClassificationMenuPanel, backgroundTrainMenuPanel);
         visiblePanel(classificationPanel, trainPanel);
     }//GEN-LAST:event_classificationMenuLabelMouseClicked
 
     private void backgroundTrainMenuPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundTrainMenuPanelMouseClicked
-        // TODO add your handling code here:
         changeColorMenu(backgroundTrainMenuPanel, backgroundClassificationMenuPanel);
         visiblePanel(trainPanel, classificationPanel);
     }//GEN-LAST:event_backgroundTrainMenuPanelMouseClicked
 
     private void backgroundClassificationMenuPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundClassificationMenuPanelMouseClicked
-        // TODO add your handling code here:
         changeColorMenu(backgroundClassificationMenuPanel, backgroundTrainMenuPanel);
         visiblePanel(classificationPanel, trainPanel);
     }//GEN-LAST:event_backgroundClassificationMenuPanelMouseClicked
@@ -782,7 +780,6 @@ public final class Home extends javax.swing.JFrame {
             String str = decisionTreeModel.evaluteTree(pathEvaluateTextField.getText());
             infoTrainModelTextArea.setText(str);
         } catch (Exception ex) {
-            //Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -793,7 +790,6 @@ public final class Home extends javax.swing.JFrame {
             String str = KNNModel.evalutekNN(pathEvaluateTextField.getText());
             infoTrainModelTextArea.setText(str);
         } catch (Exception ex) {
-            //Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -804,7 +800,6 @@ public final class Home extends javax.swing.JFrame {
             String str = naiveBayesModel.evaluateNaiveBayes(pathEvaluateTextField.getText());
             infoTrainModelTextArea.setText(str);
         } catch (Exception ex) {
-            //Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -815,7 +810,6 @@ public final class Home extends javax.swing.JFrame {
             String str = neuralNetworkModel.evaluateNeuralNetwork(pathEvaluateTextField.getText());
             infoTrainModelTextArea.setText(str);
         } catch (Exception ex) {
-            //Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -826,7 +820,6 @@ public final class Home extends javax.swing.JFrame {
             String str = SVMModel.evaluateSVM(pathEvaluateTextField.getText());
             infoTrainModelTextArea.setText(str);
         } catch (Exception ex) {
-            //Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -843,7 +836,6 @@ public final class Home extends javax.swing.JFrame {
     }
 
     private void trainModelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainModelBtnActionPerformed
-        // TODO add your handling code here:
         switch (algorithmComboBox.getSelectedIndex()) {
             case 0 -> {
                 decisionTreeTrain();
@@ -867,14 +859,12 @@ public final class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_trainModelBtnActionPerformed
 
     private void saveModelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveModelBtnActionPerformed
-        // TODO add your handling code here:
         switch (algorithmComboBox.getSelectedIndex()) {
             case 0 -> {
                 try {
                     decisionTreeModel.saveModel(currentPath + "\\model\\decisionTreeModel.model", decisionTreeModel.tree);
                     JOptionPane.showMessageDialog(null, "Successful save!");
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 1 -> {
@@ -882,7 +872,6 @@ public final class Home extends javax.swing.JFrame {
                     KNNModel.saveModel(currentPath + "\\model\\KNNModel.model", KNNModel.knn);
                     JOptionPane.showMessageDialog(null, "Successful save!");
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 2 -> {
@@ -890,7 +879,6 @@ public final class Home extends javax.swing.JFrame {
                     naiveBayesModel.saveModel(currentPath + "\\model\\naiveBayesModel.model", naiveBayesModel.nbayes);
                     JOptionPane.showMessageDialog(null, "Successful save!");
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 3 -> {
@@ -898,7 +886,6 @@ public final class Home extends javax.swing.JFrame {
                     neuralNetworkModel.saveModel(currentPath + "\\model\\neuralNetworkModel.model", neuralNetworkModel.neural);
                     JOptionPane.showMessageDialog(null, "Successful save!");
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 4 -> {
@@ -906,7 +893,6 @@ public final class Home extends javax.swing.JFrame {
                     SVMModel.saveModel(currentPath + "\\model\\SVMModel.model", SVMModel.svm);
                     JOptionPane.showMessageDialog(null, "Successful save!");
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             default -> {
@@ -914,7 +900,6 @@ public final class Home extends javax.swing.JFrame {
                     KNNModel.saveModel(currentPath + "\\model\\KNNModel.model", KNNModel.knn);
                     JOptionPane.showMessageDialog(null, "Successful save!");
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -941,16 +926,36 @@ public final class Home extends javax.swing.JFrame {
                 KnowledgeModel model = new KnowledgeModel();
                 model.saveDataArff(fileName, labelData);
             } catch (IOException ex) {
-                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_exportBtnActionPerformed
+
+    public static ArrayList<String[]> readCsv(String csvFile) {
+        try {
+            ArrayList<String[]> data = new ArrayList<>();
+            File file = new File(csvFile);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = " ";
+            String[] tempArr;
+            while ((line = br.readLine()) != null) {
+                String[] row = {};
+                tempArr = line.split(",");
+                data.add(tempArr);
+            }
+            br.close();
+            return data;
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return null;
+    }
 
     public void loadDataTempPredict() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         predictTable.setModel(defaultTableModel);
         String csvFile = currentPath + "\\data\\tempPredict.csv";
-        ArrayList<String[]> data = ReadCsv.read(csvFile);
+        ArrayList<String[]> data = readCsv(csvFile);
         if (data != null) {
             for (String column : data.get(0)) {
                 defaultTableModel.addColumn(column.replaceAll("\'", "").toUpperCase());
@@ -962,7 +967,6 @@ public final class Home extends javax.swing.JFrame {
     }
 
     private void predictFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictFileBtnActionPerformed
-        // TODO add your handling code here:
         String pathUnlabel = "";
         JFileChooser chooser = getFileViaUI("Arff File", "arff");
         if (chooser != null) {
@@ -985,7 +989,6 @@ public final class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 1 -> {
@@ -1001,7 +1004,6 @@ public final class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "KNNModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -1018,7 +1020,6 @@ public final class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "naiveBayesModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -1035,7 +1036,6 @@ public final class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "neuralNetworkModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -1105,8 +1105,6 @@ public final class Home extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 1 -> {
@@ -1122,8 +1120,6 @@ public final class Home extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 2 -> {
@@ -1139,8 +1135,6 @@ public final class Home extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 3 -> {
@@ -1156,8 +1150,6 @@ public final class Home extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             case 4 -> {
@@ -1173,8 +1165,6 @@ public final class Home extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -1191,15 +1181,12 @@ public final class Home extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Home.class
-                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
 
     private void predictBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictBtnActionPerformed
-        // TODO add your handling code here:
         try {
             float fixedAcidity = Float.parseFloat(textField1.getText());
             float volatileAcidity = Float.parseFloat(textField2.getText());
