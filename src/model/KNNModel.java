@@ -8,16 +8,12 @@ package model;
  *
  * @author Admin
  */
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import weka.classifiers.Evaluation;
 import weka.classifiers.lazy.IBk;
 import weka.core.Attribute;
-import weka.core.Debug;
 import weka.core.Debug.Random;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ConverterUtils;
 import weka.core.converters.ConverterUtils.DataSource;
 
 public class KNNModel extends KnowledgeModel {
@@ -58,9 +54,6 @@ public class KNNModel extends KnowledgeModel {
         for (int i = 0; i < unlabel.numInstances(); i++) {
             double predict = knn.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
-            Attribute quality = unlabel.instance(i).attribute(11);
-            //System.out.println(unlabel.instance(i).toString(quality));
-            System.out.println(quality);
         }
         return unlabel;
     }
@@ -75,10 +68,5 @@ public class KNNModel extends KnowledgeModel {
         data.setClassValue(predict);
         Attribute quality = data.attribute(11);
         return data.toString(quality);
-    }
-
-    @Override
-    public String toString() {
-        return eval.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 }

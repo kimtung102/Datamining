@@ -934,12 +934,12 @@ public final class Home extends javax.swing.JFrame {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = chooser.getSelectedFile();
             fileName = fileToSave.getAbsolutePath();
-            if(!fileName.contains(".arff")) {
+            if (!fileName.contains(".arff")) {
                 fileName += ".arff";
             }
             try {
                 KnowledgeModel model = new KnowledgeModel();
-                model.saveData(fileName, labelData);
+                model.saveDataArff(fileName, labelData);
             } catch (IOException ex) {
                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -978,7 +978,7 @@ public final class Home extends javax.swing.JFrame {
                         DecisionTreeModel model = new DecisionTreeModel("", "", null);
                         model.tree = (J48) model.loadModel(pathModel);
                         labelData = model.predictClassLabel(pathUnlabel);
-                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        model.saveDataCSV(currentPath + "\\data\\tempPredict.csv", labelData);
                         loadDataTempPredict();
 
                     } else {
@@ -995,10 +995,10 @@ public final class Home extends javax.swing.JFrame {
                         KNNModel model = new KNNModel("", "", null);
                         model.knn = (IBk) model.loadModel(pathModel);
                         labelData = model.predictClassLabel(pathUnlabel);
-                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        model.saveDataCSV(currentPath + "\\data\\tempPredict.csv", labelData);
                         loadDataTempPredict();
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "KNNModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -1012,10 +1012,10 @@ public final class Home extends javax.swing.JFrame {
                         NaiveBayesModel model = new NaiveBayesModel("", "", null);
                         model.nbayes = (NaiveBayes) model.loadModel(pathModel);
                         labelData = model.predictClassLabel(pathUnlabel);
-                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        model.saveDataCSV(currentPath + "\\data\\tempPredict.csv", labelData);
                         loadDataTempPredict();
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "naiveBayesModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -1029,10 +1029,10 @@ public final class Home extends javax.swing.JFrame {
                         NeuralNetworkModel model = new NeuralNetworkModel("", "", null);
                         model.neural = (MultilayerPerceptron) model.loadModel(pathModel);
                         labelData = model.predictClassLabel(pathUnlabel);
-                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        model.saveDataCSV(currentPath + "\\data\\tempPredict.csv", labelData);
                         loadDataTempPredict();
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "neuralNetworkModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -1046,10 +1046,10 @@ public final class Home extends javax.swing.JFrame {
                         SVMModel model = new SVMModel("", "", null);
                         model.svm = (SMO) model.loadModel(pathModel);
                         labelData = model.predictClassLabel(pathUnlabel);
-                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        model.saveDataCSV(currentPath + "\\data\\tempPredict.csv", labelData);
                         loadDataTempPredict();
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "SVMModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -1063,10 +1063,10 @@ public final class Home extends javax.swing.JFrame {
                         KNNModel model = new KNNModel("", "", null);
                         model.knn = (IBk) model.loadModel(pathModel);
                         labelData = model.predictClassLabel(pathUnlabel);
-                        model.saveData2CSVByInstance(currentPath + "\\data\\tempPredict.csv", labelData);
+                        model.saveDataCSV(currentPath + "\\data\\tempPredict.csv", labelData);
                         loadDataTempPredict();
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "KNNModel.model don't exist, Please train and save it before predict");
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -1118,7 +1118,7 @@ public final class Home extends javax.swing.JFrame {
                         String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by KNNModel(1-10): " + res);
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "KNNModel.model don't exist, Please train and save it before predict");
 
                     }
                 } catch (Exception ex) {
@@ -1135,7 +1135,7 @@ public final class Home extends javax.swing.JFrame {
                         String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by NaiveBayesModel(1-10): " + res);
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "naiveBayesModel.model don't exist, Please train and save it before predict");
 
                     }
                 } catch (Exception ex) {
@@ -1152,7 +1152,7 @@ public final class Home extends javax.swing.JFrame {
                         String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by NeuralNetworkModel(1-10): " + res);
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "neuralNetworkModel.model don't exist, Please train and save it before predict");
 
                     }
                 } catch (Exception ex) {
@@ -1169,7 +1169,7 @@ public final class Home extends javax.swing.JFrame {
                         String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by SVMModel(1-10): " + res);
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "SVMModel.model don't exist, Please train and save it before predict");
 
                     }
                 } catch (Exception ex) {
@@ -1187,7 +1187,7 @@ public final class Home extends javax.swing.JFrame {
                         String res = model.predictOneClassLabel(pathUnlabel, wine.getInstanceData());
                         JOptionPane.showMessageDialog(null, "Wine qualification predict by KNNModel(1-10): " + res);
                     } else {
-                        JOptionPane.showMessageDialog(null, "decisionTreeModel.model don't exist, Please train and save it before predict");
+                        JOptionPane.showMessageDialog(null, "KNNModel.model don't exist, Please train and save it before predict");
 
                     }
                 } catch (Exception ex) {
@@ -1200,27 +1200,25 @@ public final class Home extends javax.swing.JFrame {
 
     private void predictBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predictBtnActionPerformed
         // TODO add your handling code here:
-        float fixedAcidity = Float.parseFloat(textField1.getText());
-        float volatileAcidity = Float.parseFloat(textField2.getText());
-        float citricAcid = Float.parseFloat(textField3.getText());
-        float residualSugar = Float.parseFloat(textField4.getText());
-        float chlorides = Float.parseFloat(textField5.getText());
-        float freeSulfurDioxide = Float.parseFloat(textField6.getText());
-        float totalSulfurDioxide = Float.parseFloat(textField7.getText());
-        float density = Float.parseFloat(textField8.getText());
-        float pH = Float.parseFloat(textField9.getText());
-        float sulphates = Float.parseFloat(textField10.getText());
-        float alcohol = Float.parseFloat(textField11.getText());
-
-        Wine wine = new Wine(fixedAcidity, volatileAcidity, citricAcid, residualSugar, chlorides, freeSulfurDioxide,
-                totalSulfurDioxide, density, pH, sulphates, alcohol);
-
         try {
+            float fixedAcidity = Float.parseFloat(textField1.getText());
+            float volatileAcidity = Float.parseFloat(textField2.getText());
+            float citricAcid = Float.parseFloat(textField3.getText());
+            float residualSugar = Float.parseFloat(textField4.getText());
+            float chlorides = Float.parseFloat(textField5.getText());
+            float freeSulfurDioxide = Float.parseFloat(textField6.getText());
+            float totalSulfurDioxide = Float.parseFloat(textField7.getText());
+            float density = Float.parseFloat(textField8.getText());
+            float pH = Float.parseFloat(textField9.getText());
+            float sulphates = Float.parseFloat(textField10.getText());
+            float alcohol = Float.parseFloat(textField11.getText());
+
+            Wine wine = new Wine(fixedAcidity, volatileAcidity, citricAcid, residualSugar, chlorides, freeSulfurDioxide,
+                    totalSulfurDioxide, density, pH, sulphates, alcohol);
             predictData(wine);
 
         } catch (Exception ex) {
-            Logger.getLogger(UI.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Data invalid, please try again.");
         }
     }//GEN-LAST:event_predictBtnActionPerformed
 

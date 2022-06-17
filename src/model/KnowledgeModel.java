@@ -43,41 +43,27 @@ public class KnowledgeModel {
         }
     }
 
-    public void saveData(String filename, Instances dataset) throws IOException {
+    public void saveDataArff(String filename, Instances dataset) throws IOException {
         ArffSaver outData = new ArffSaver();
         outData.setInstances(dataset);
         outData.setFile(new File(filename));
         outData.writeBatch();
-        System.out.println("saved");
     }
 
-    public void saveData2CSV(String filename) throws IOException {
-        CSVSaver outData = new CSVSaver();
-        outData.setInstances(this.dataset);
-        outData.setFile(new File(filename));
-        outData.writeBatch();
-        System.out.println("saved");
-    }
-
-    public void saveData2CSVByInstance(String filename, Instances data) throws IOException {
+    public void saveDataCSV(String filename, Instances data) throws IOException {
         CSVSaver outData = new CSVSaver();
         outData.setInstances(data);
         outData.setFile(new File(filename));
         outData.writeBatch();
-        System.out.println("saved");
     }
 
-    public Instances divideTrainTest(Instances originalSet, double percent, boolean isTest) throws Exception {
+    public Instances divideTrainTest(Instances originalSet, double percent,
+            boolean isTest) throws Exception {
         RemovePercentage rp = new RemovePercentage();
         rp.setPercentage(percent);
         rp.setInvertSelection(isTest);
         rp.setInputFormat(originalSet);
         return Filter.useFilter(originalSet, rp);
-    }
-
-    @Override
-    public String toString() {
-        return dataset.toSummaryString();
     }
 
     public void setTrainset(String filename) throws Exception {
@@ -96,5 +82,10 @@ public class KnowledgeModel {
 
     public Object loadModel(String filename) throws Exception {
         return weka.core.SerializationHelper.read(filename);
+    }
+    
+    @Override
+    public String toString() {
+        return dataset.toSummaryString();
     }
 }

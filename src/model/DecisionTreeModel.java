@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
 import weka.core.Attribute;
@@ -13,6 +11,7 @@ import weka.core.Debug.Random;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
+import weka.core.converters.ConverterUtils.DataSource;
 
 /**
  *
@@ -49,23 +48,20 @@ public class DecisionTreeModel extends KnowledgeModel {
 
     public Instances predictClassLabel(String fileIn) throws Exception {
         //Doc du lieu can du doan vao bo nho: file unlabel
-        ConverterUtils.DataSource ds = new ConverterUtils.DataSource(fileIn);
+        DataSource ds = new DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
         unlabel.setClassIndex(unlabel.numAttributes() - 1);
         //Du doan classLabel cho tung instances
         for (int i = 0; i < unlabel.numInstances(); i++) {
             double predict = tree.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
-            Attribute quality = unlabel.instance(i).attribute(11);
-            //System.out.println(unlabel.instance(i).toString(quality));
-            System.out.println(quality);
         }
         return unlabel;
     }
 
     public String predictOneClassLabel(String fileIn, Instance data) throws Exception {
         //Doc du lieu can du doan vao bo nho: file unlabel
-        ConverterUtils.DataSource ds = new ConverterUtils.DataSource(fileIn);
+        DataSource ds = new DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
         unlabel.setClassIndex(unlabel.numAttributes() - 1);
         data.setDataset(unlabel);
@@ -74,10 +70,4 @@ public class DecisionTreeModel extends KnowledgeModel {
         Attribute quality = data.attribute(11);
         return data.toString(quality);
     }
-
-    @Override
-    public String toString() {
-        return tree.toSummaryString();
-    }
-
 }

@@ -4,9 +4,6 @@
  */
 package model;
 
-import static App.UI.currentPath;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.FastVector;

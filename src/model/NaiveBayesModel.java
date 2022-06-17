@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.core.Attribute;
@@ -32,12 +30,10 @@ public class NaiveBayesModel extends KnowledgeModel {
     }
 
     public void bui1Naivebayes(String filename) throws Exception {
-        //Doc train set vao bo nho
         setTrainset(filename);
         this.trainset.setClassIndex(this.trainset.numAttributes() - 1);
-        // Huan luyen mo hinh NavieBayes
         this.nbayes = new NaiveBayes();
-        //nbayes.setOption(this.model_options)
+        //nbayes.setOptions(this.model_options);
         nbayes.buildClassifier(this.trainset);
     }
 
@@ -62,9 +58,6 @@ public class NaiveBayesModel extends KnowledgeModel {
         for (int i = 0; i < unlabel.numInstances(); i++) {
             double predict = nbayes.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
-            Attribute quality = unlabel.instance(i).attribute(11);
-            //System.out.println(unlabel.instance(i).toString(quality));
-            System.out.println(quality);
         }
         return unlabel;
     }
@@ -79,10 +72,5 @@ public class NaiveBayesModel extends KnowledgeModel {
         data.setClassValue(predict);
         Attribute quality = data.attribute(11);
         return data.toString(quality);
-    }
-
-    @Override
-    public String toString() {
-        return eval.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 }
