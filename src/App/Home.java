@@ -53,8 +53,8 @@ public final class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
-        changeColorMenu(backgroundTrainMenuPanel, backgroundClassificationMenuPanel);
-        visiblePanel(trainPanel, classificationPanel);
+        changeColorMenu( backgroundTrainMenuPanel,backgroundClassificationMenuPanel);
+        visiblePanel( classificationPanel,trainPanel);
     }
 
     /**
@@ -72,9 +72,9 @@ public final class Home extends javax.swing.JFrame {
         sidePanel = new javax.swing.JPanel();
         wineImg = new javax.swing.JLabel();
         backgroundClassificationMenuPanel = new javax.swing.JPanel();
-        classificationMenuLabel = new javax.swing.JLabel();
-        backgroundTrainMenuPanel = new javax.swing.JPanel();
         trainMenuLabel = new javax.swing.JLabel();
+        backgroundTrainMenuPanel = new javax.swing.JPanel();
+        classificationMenuLabel = new javax.swing.JLabel();
         trainPanel = new javax.swing.JPanel();
         trainHeadingLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -148,13 +148,13 @@ public final class Home extends javax.swing.JFrame {
             }
         });
 
-        classificationMenuLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        classificationMenuLabel.setForeground(new java.awt.Color(255, 255, 255));
-        classificationMenuLabel.setText("Wine Classification");
-        classificationMenuLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        classificationMenuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        trainMenuLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        trainMenuLabel.setForeground(new java.awt.Color(255, 255, 255));
+        trainMenuLabel.setText("Train model");
+        trainMenuLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        trainMenuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                classificationMenuLabelMouseClicked(evt);
+                trainMenuLabelMouseClicked(evt);
             }
         });
 
@@ -163,15 +163,15 @@ public final class Home extends javax.swing.JFrame {
         backgroundClassificationMenuPanelLayout.setHorizontalGroup(
             backgroundClassificationMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundClassificationMenuPanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(classificationMenuLabel)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(trainMenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         backgroundClassificationMenuPanelLayout.setVerticalGroup(
             backgroundClassificationMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundClassificationMenuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(classificationMenuLabel)
+                .addComponent(trainMenuLabel)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -185,13 +185,13 @@ public final class Home extends javax.swing.JFrame {
             }
         });
 
-        trainMenuLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        trainMenuLabel.setForeground(new java.awt.Color(255, 255, 255));
-        trainMenuLabel.setText("Train model");
-        trainMenuLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        trainMenuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        classificationMenuLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        classificationMenuLabel.setForeground(new java.awt.Color(255, 255, 255));
+        classificationMenuLabel.setText("Wine Classification");
+        classificationMenuLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        classificationMenuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                trainMenuLabelMouseClicked(evt);
+                classificationMenuLabelMouseClicked(evt);
             }
         });
 
@@ -200,16 +200,16 @@ public final class Home extends javax.swing.JFrame {
         backgroundTrainMenuPanelLayout.setHorizontalGroup(
             backgroundTrainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundTrainMenuPanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(trainMenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(classificationMenuLabel)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         backgroundTrainMenuPanelLayout.setVerticalGroup(
             backgroundTrainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundTrainMenuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(trainMenuLabel)
-                .addContainerGap(9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundTrainMenuPanelLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(classificationMenuLabel)
+                .addContainerGap())
         );
 
         sidePanel.add(backgroundTrainMenuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
@@ -750,22 +750,22 @@ public final class Home extends javax.swing.JFrame {
         hiddenPanel1.setVisible(false);
     }
     private void trainMenuLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trainMenuLabelMouseClicked
-        changeColorMenu(backgroundTrainMenuPanel, backgroundClassificationMenuPanel);
+        changeColorMenu( backgroundClassificationMenuPanel,backgroundTrainMenuPanel);
         visiblePanel(trainPanel, classificationPanel);
     }//GEN-LAST:event_trainMenuLabelMouseClicked
 
     private void classificationMenuLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classificationMenuLabelMouseClicked
-        changeColorMenu(backgroundClassificationMenuPanel, backgroundTrainMenuPanel);
+        changeColorMenu( backgroundTrainMenuPanel,backgroundClassificationMenuPanel);
         visiblePanel(classificationPanel, trainPanel);
     }//GEN-LAST:event_classificationMenuLabelMouseClicked
 
     private void backgroundTrainMenuPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundTrainMenuPanelMouseClicked
-        changeColorMenu(backgroundTrainMenuPanel, backgroundClassificationMenuPanel);
+        changeColorMenu( backgroundClassificationMenuPanel,backgroundTrainMenuPanel);
         visiblePanel(trainPanel, classificationPanel);
     }//GEN-LAST:event_backgroundTrainMenuPanelMouseClicked
 
     private void backgroundClassificationMenuPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundClassificationMenuPanelMouseClicked
-        changeColorMenu(backgroundClassificationMenuPanel, backgroundTrainMenuPanel);
+        changeColorMenu( backgroundTrainMenuPanel,backgroundClassificationMenuPanel);
         visiblePanel(classificationPanel, trainPanel);
     }//GEN-LAST:event_backgroundClassificationMenuPanelMouseClicked
 
