@@ -75,22 +75,6 @@ public final class Home extends javax.swing.JFrame {
         trainMenuLabel = new javax.swing.JLabel();
         backgroundTrainMenuPanel = new javax.swing.JPanel();
         classificationMenuLabel = new javax.swing.JLabel();
-        trainPanel = new javax.swing.JPanel();
-        trainHeadingLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        trainPathLine = new javax.swing.JSeparator();
-        pathTrainTextField = new javax.swing.JTextField();
-        algorithmComboBox = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        chooseEvaluateFileBtn = new javax.swing.JButton();
-        trainModelBtn = new javax.swing.JButton();
-        saveModelBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        infoTrainModelTextArea = new javax.swing.JTextArea();
-        jLabel14 = new javax.swing.JLabel();
-        pathEvaluateTextField = new javax.swing.JTextField();
-        trainPathLine1 = new javax.swing.JSeparator();
-        chooseTrainFileBtn1 = new javax.swing.JButton();
         classificationPanel = new javax.swing.JPanel();
         ClassificationHeadingLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -122,6 +106,22 @@ public final class Home extends javax.swing.JFrame {
         predictFileBtn = new javax.swing.JButton();
         modelTypeComboBox = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        trainPanel = new javax.swing.JPanel();
+        trainHeadingLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        trainPathLine = new javax.swing.JSeparator();
+        pathTrainTextField = new javax.swing.JTextField();
+        algorithmComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        chooseEvaluateFileBtn = new javax.swing.JButton();
+        trainModelBtn = new javax.swing.JButton();
+        saveModelBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        infoTrainModelTextArea = new javax.swing.JTextArea();
+        jLabel14 = new javax.swing.JLabel();
+        pathEvaluateTextField = new javax.swing.JTextField();
+        trainPathLine1 = new javax.swing.JSeparator();
+        chooseTrainFileBtn1 = new javax.swing.JButton();
         closeBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -215,196 +215,6 @@ public final class Home extends javax.swing.JFrame {
         sidePanel.add(backgroundTrainMenuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
 
         backroundPanel.add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 242, 560));
-
-        trainPanel.setBackground(new java.awt.Color(255, 245, 245));
-        trainPanel.setForeground(new java.awt.Color(255, 82, 82));
-
-        trainHeadingLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        trainHeadingLabel.setForeground(new java.awt.Color(250, 82, 82));
-        trainHeadingLabel.setText("Train wine model");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 82, 82));
-        jLabel1.setText("Train path: ");
-
-        trainPathLine.setBackground(new java.awt.Color(255, 82, 82));
-        trainPathLine.setForeground(new java.awt.Color(255, 82, 82));
-
-        pathTrainTextField.setBackground(new java.awt.Color(255, 245, 245));
-        pathTrainTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        pathTrainTextField.setForeground(new java.awt.Color(255, 82, 82));
-        pathTrainTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        algorithmComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        algorithmComboBox.setForeground(new java.awt.Color(255, 0, 0));
-        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Decision tree", "KNN", "Naive Bayes", "Neural Network", "Support Vector Machine(SVM)" }));
-        algorithmComboBox.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
-        algorithmComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        algorithmComboBox.setFocusable(false);
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 82, 82));
-        jLabel2.setText("Algorithm:");
-
-        chooseEvaluateFileBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        chooseEvaluateFileBtn.setForeground(new java.awt.Color(255, 82, 82));
-        chooseEvaluateFileBtn.setText("Choose evaluate file");
-        chooseEvaluateFileBtn.setActionCommand("Choose file train");
-        chooseEvaluateFileBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
-        chooseEvaluateFileBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        chooseEvaluateFileBtn.setFocusPainted(false);
-        chooseEvaluateFileBtn.setFocusable(false);
-        chooseEvaluateFileBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseEvaluateFileBtnActionPerformed(evt);
-            }
-        });
-
-        trainModelBtn.setBackground(new java.awt.Color(255, 82, 82));
-        trainModelBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        trainModelBtn.setForeground(new java.awt.Color(255, 255, 255));
-        trainModelBtn.setText("Train Model");
-        trainModelBtn.setActionCommand("Choose file train");
-        trainModelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        trainModelBtn.setFocusPainted(false);
-        trainModelBtn.setFocusable(false);
-        trainModelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trainModelBtnActionPerformed(evt);
-            }
-        });
-
-        saveModelBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        saveModelBtn.setForeground(new java.awt.Color(255, 82, 82));
-        saveModelBtn.setText("Save Model");
-        saveModelBtn.setActionCommand("Choose file train");
-        saveModelBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
-        saveModelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        saveModelBtn.setFocusPainted(false);
-        saveModelBtn.setFocusable(false);
-        saveModelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveModelBtnActionPerformed(evt);
-            }
-        });
-
-        infoTrainModelTextArea.setEditable(false);
-        infoTrainModelTextArea.setBackground(new java.awt.Color(255, 255, 255));
-        infoTrainModelTextArea.setColumns(20);
-        infoTrainModelTextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        infoTrainModelTextArea.setForeground(new java.awt.Color(255, 82, 82));
-        infoTrainModelTextArea.setRows(5);
-        infoTrainModelTextArea.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
-        jScrollPane1.setViewportView(infoTrainModelTextArea);
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 82, 82));
-        jLabel14.setText("Evaluate path: ");
-
-        pathEvaluateTextField.setBackground(new java.awt.Color(255, 245, 245));
-        pathEvaluateTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        pathEvaluateTextField.setForeground(new java.awt.Color(255, 82, 82));
-        pathEvaluateTextField.setToolTipText("");
-        pathEvaluateTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        trainPathLine1.setBackground(new java.awt.Color(255, 82, 82));
-        trainPathLine1.setForeground(new java.awt.Color(255, 82, 82));
-
-        chooseTrainFileBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        chooseTrainFileBtn1.setForeground(new java.awt.Color(255, 82, 82));
-        chooseTrainFileBtn1.setText("Choose train file");
-        chooseTrainFileBtn1.setActionCommand("Choose file train");
-        chooseTrainFileBtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
-        chooseTrainFileBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        chooseTrainFileBtn1.setFocusPainted(false);
-        chooseTrainFileBtn1.setFocusable(false);
-        chooseTrainFileBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseTrainFileBtn1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout trainPanelLayout = new javax.swing.GroupLayout(trainPanel);
-        trainPanel.setLayout(trainPanelLayout);
-        trainPanelLayout.setHorizontalGroup(
-            trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel14)
-                    .addGroup(trainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(8, 8, 8)))
-                .addGap(18, 18, 18)
-                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(trainPanelLayout.createSequentialGroup()
-                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pathEvaluateTextField)
-                            .addComponent(pathTrainTextField)
-                            .addComponent(trainPathLine)
-                            .addGroup(trainPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(trainHeadingLabel))
-                            .addComponent(trainPathLine1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chooseEvaluateFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chooseTrainFileBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(trainPanelLayout.createSequentialGroup()
-                        .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
-                        .addComponent(trainModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(saveModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))))
-        );
-        trainPanelLayout.setVerticalGroup(
-            trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trainPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(trainHeadingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(trainPanelLayout.createSequentialGroup()
-                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(pathTrainTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addComponent(trainPathLine, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pathEvaluateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)))
-                    .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(chooseTrainFileBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(trainPanelLayout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(chooseEvaluateFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(7, 7, 7)
-                .addComponent(trainPathLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(trainModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        backroundPanel.add(trainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 610, 540));
 
         classificationPanel.setBackground(new java.awt.Color(255, 245, 245));
         classificationPanel.setForeground(new java.awt.Color(255, 82, 82));
@@ -706,6 +516,196 @@ public final class Home extends javax.swing.JFrame {
         );
 
         backroundPanel.add(classificationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 610, 560));
+
+        trainPanel.setBackground(new java.awt.Color(255, 245, 245));
+        trainPanel.setForeground(new java.awt.Color(255, 82, 82));
+
+        trainHeadingLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        trainHeadingLabel.setForeground(new java.awt.Color(250, 82, 82));
+        trainHeadingLabel.setText("Train wine model");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 82, 82));
+        jLabel1.setText("Train path: ");
+
+        trainPathLine.setBackground(new java.awt.Color(255, 82, 82));
+        trainPathLine.setForeground(new java.awt.Color(255, 82, 82));
+
+        pathTrainTextField.setBackground(new java.awt.Color(255, 245, 245));
+        pathTrainTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pathTrainTextField.setForeground(new java.awt.Color(255, 82, 82));
+        pathTrainTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        algorithmComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        algorithmComboBox.setForeground(new java.awt.Color(255, 0, 0));
+        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Decision tree", "KNN", "Naive Bayes", "Neural Network", "Support Vector Machine(SVM)" }));
+        algorithmComboBox.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
+        algorithmComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        algorithmComboBox.setFocusable(false);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 82, 82));
+        jLabel2.setText("Algorithm:");
+
+        chooseEvaluateFileBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chooseEvaluateFileBtn.setForeground(new java.awt.Color(255, 82, 82));
+        chooseEvaluateFileBtn.setText("Choose evaluate file");
+        chooseEvaluateFileBtn.setActionCommand("Choose file train");
+        chooseEvaluateFileBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
+        chooseEvaluateFileBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        chooseEvaluateFileBtn.setFocusPainted(false);
+        chooseEvaluateFileBtn.setFocusable(false);
+        chooseEvaluateFileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseEvaluateFileBtnActionPerformed(evt);
+            }
+        });
+
+        trainModelBtn.setBackground(new java.awt.Color(255, 82, 82));
+        trainModelBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        trainModelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        trainModelBtn.setText("Train Model");
+        trainModelBtn.setActionCommand("Choose file train");
+        trainModelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        trainModelBtn.setFocusPainted(false);
+        trainModelBtn.setFocusable(false);
+        trainModelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trainModelBtnActionPerformed(evt);
+            }
+        });
+
+        saveModelBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        saveModelBtn.setForeground(new java.awt.Color(255, 82, 82));
+        saveModelBtn.setText("Save Model");
+        saveModelBtn.setActionCommand("Choose file train");
+        saveModelBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
+        saveModelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveModelBtn.setFocusPainted(false);
+        saveModelBtn.setFocusable(false);
+        saveModelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveModelBtnActionPerformed(evt);
+            }
+        });
+
+        infoTrainModelTextArea.setEditable(false);
+        infoTrainModelTextArea.setBackground(new java.awt.Color(255, 255, 255));
+        infoTrainModelTextArea.setColumns(20);
+        infoTrainModelTextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        infoTrainModelTextArea.setForeground(new java.awt.Color(255, 82, 82));
+        infoTrainModelTextArea.setRows(5);
+        infoTrainModelTextArea.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
+        jScrollPane1.setViewportView(infoTrainModelTextArea);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 82, 82));
+        jLabel14.setText("Evaluate path: ");
+
+        pathEvaluateTextField.setBackground(new java.awt.Color(255, 245, 245));
+        pathEvaluateTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pathEvaluateTextField.setForeground(new java.awt.Color(255, 82, 82));
+        pathEvaluateTextField.setToolTipText("");
+        pathEvaluateTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        trainPathLine1.setBackground(new java.awt.Color(255, 82, 82));
+        trainPathLine1.setForeground(new java.awt.Color(255, 82, 82));
+
+        chooseTrainFileBtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chooseTrainFileBtn1.setForeground(new java.awt.Color(255, 82, 82));
+        chooseTrainFileBtn1.setText("Choose train file");
+        chooseTrainFileBtn1.setActionCommand("Choose file train");
+        chooseTrainFileBtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 82, 82), 1, true));
+        chooseTrainFileBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        chooseTrainFileBtn1.setFocusPainted(false);
+        chooseTrainFileBtn1.setFocusable(false);
+        chooseTrainFileBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseTrainFileBtn1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout trainPanelLayout = new javax.swing.GroupLayout(trainPanel);
+        trainPanel.setLayout(trainPanelLayout);
+        trainPanelLayout.setHorizontalGroup(
+            trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel14)
+                    .addGroup(trainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(8, 8, 8)))
+                .addGap(18, 18, 18)
+                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(trainPanelLayout.createSequentialGroup()
+                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pathEvaluateTextField)
+                            .addComponent(pathTrainTextField)
+                            .addComponent(trainPathLine)
+                            .addGroup(trainPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(trainHeadingLabel))
+                            .addComponent(trainPathLine1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chooseEvaluateFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chooseTrainFileBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(trainPanelLayout.createSequentialGroup()
+                        .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trainPanelLayout.createSequentialGroup()
+                        .addComponent(trainModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117))))
+        );
+        trainPanelLayout.setVerticalGroup(
+            trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trainPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(trainHeadingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(trainPanelLayout.createSequentialGroup()
+                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(pathTrainTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addComponent(trainPathLine, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pathEvaluateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)))
+                    .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(chooseTrainFileBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(trainPanelLayout.createSequentialGroup()
+                            .addGap(60, 60, 60)
+                            .addComponent(chooseEvaluateFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(7, 7, 7)
+                .addComponent(trainPathLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(trainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(trainModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveModelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        backroundPanel.add(trainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 610, 540));
 
         closeBtn.setFont(new java.awt.Font("Lithos Pro Regular", 1, 36)); // NOI18N
         closeBtn.setForeground(new java.awt.Color(240, 62, 62));
